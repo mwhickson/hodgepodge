@@ -1,10 +1,20 @@
 package Models;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Podcast {
     private String url = "";
     private String title = "";
+    private String owner = "";
+    private String website = "";
+    private String description = "";
+    private String author = "";
+    private String category = "";
+    private String image = "";
+    private LocalDateTime updated = LocalDateTime.MIN;
+    private ArrayList<Episode> episodes = new ArrayList<Episode>();
 
     public String getUrl() {
         return url;
@@ -20,6 +30,70 @@ public class Podcast {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public LocalDateTime getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(LocalDateTime updated) {
+        this.updated = updated;
+    }
+
+    public ArrayList<Episode> getEpisodes() {
+        return episodes;
+    }
+
+    public void setEpisodes(ArrayList<Episode> episodes) {
+        this.episodes = episodes;
     }
 
     public Podcast() {
