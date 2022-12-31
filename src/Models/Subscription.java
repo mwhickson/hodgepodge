@@ -3,23 +3,14 @@ package Models;
 import java.util.HashMap;
 
 public class Subscription {
-    private String url = "";
-    private String title = "";
+    private Podcast podcast = new Podcast();
     
-    public String getUrl() {
-        return url;
+    public Podcast getPodcast() {
+        return podcast;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+    public void setPodcast(Podcast podcast) {
+        this.podcast = podcast;
     }
 
     public Subscription() {
@@ -31,53 +22,29 @@ public class Subscription {
     }
 
     public Subscription(String url, String title) {
-        this.url = url;
-        this.title = title;
+        this.podcast.setTitle(title);
+        this.podcast.setUrl(url);
     }
 
     public Subscription(HashMap data) {
         this();
-        PopulateFromHashMap(data);
+        this.podcast.PopulateFromHashMap(data);
     }
 
     public String toString() {
-        return String.format("%s (%s)", this.title, this.url);
+        return String.format("%s (%s)", this.podcast.getTitle(), this.podcast.getUrl());
     }
 
     public String toJSON() {
         // FIX: less quick 'n dirty with the JSON escaping...
         return String.format(
             "{\"title\": \"%s\", \"url\": \"%s\"}", 
-            this.title.replace("\"", "\\\""), 
-            this.url.replace("\"", "\\\"")
+            this.podcast.getTitle().replace("\"", "\\\""), 
+            this.podcast.getUrl().replace("\"", "\\\"")
         );
     }
 
     public void PopulateFromHashMap(HashMap details) {
-        String url = "";
-        String title = "";
-
-        if (details != null) {
-            if (details.containsKey("title")) {
-                title = details.get("title").toString();
-            }
-
-            if (details.containsKey("url")) {
-                url = details.get("url").toString();
-            }
-
-            // OpmlConverter will have a different world view... let's support that...
-
-            if (details.containsKey("text")) {
-                title = details.get("text").toString();
-            }
-
-            if (details.containsKey("xmlUrl")) {
-                url = details.get("xmlUrl").toString();
-            }
-        }
-
-        this.url = url;
-        this.title = title;
+        this.podcast.PopulateFromHashMap(details);
     }
 }

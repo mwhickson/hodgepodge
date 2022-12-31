@@ -22,7 +22,6 @@ public class App {
         f.setVisible(true);
 
         // String opml = OpmlConverter.ReadOpmlFileAsString(Paths.get("{pathtoopml}"), Charset.forName("UTF-8"));
-        // System.out.println(opml);
 
         // ArrayList<Subscription> subscriptions = new ArrayList<Subscription>();
         // ArrayList<HashMap> subscriptionData = OpmlConverter.BuildSubscriptionPropertyListFromOpmlString(opml);
@@ -38,7 +37,5 @@ public class App {
         //     Subscription s = its.next();
         //     System.out.format("%s%n", s.toJSON());
         // }
-
-        // OpmlConverter.WriteOpmlStringToFile(opml, Paths.get("{pathtoopml}"), Charset.forName("UTF-8"), false);
     }
 }
