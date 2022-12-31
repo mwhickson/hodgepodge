@@ -1,4 +1,4 @@
-package UI;
+package Views;
 
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
@@ -138,7 +138,12 @@ public class MainForm extends JFrame {
         aboutMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Hello there!", "About", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(
+                    null, 
+                    "Hodgepodge\na podcast player\nby Matthew Hickson", 
+                    "About", 
+                    JOptionPane.INFORMATION_MESSAGE
+                );
             }
         });
 

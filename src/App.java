@@ -1,6 +1,9 @@
 import javax.swing.UIManager;
+// import java.nio.charset.Charset;
+// import java.nio.file.Paths;
 
-import UI.MainForm;
+// import Controllers.OpmlConverter;
+import Views.MainForm;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -13,5 +16,10 @@ public class App {
 
         MainForm f = new MainForm();
         f.setVisible(true);
+
+        // String opml = OpmlConverter.ReadOpmlFileAsString(Paths.get("{pathtoopml}"), Charset.forName("UTF-8"));
+        // System.out.println(opml);
+
+        // OpmlConverter.WriteOpmlStringToFile(opml, Paths.get("{pathtoopml}"), Charset.forName("UTF-8"), false);
     }
 }

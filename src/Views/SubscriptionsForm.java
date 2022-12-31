@@ -1,4 +1,4 @@
-package UI;
+package Views;
 public class SubscriptionsForm {
     
 }
