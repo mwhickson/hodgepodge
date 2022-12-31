@@ -4,13 +4,24 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class Episode {
+    // REF: https://support.google.com/podcast-publishers/answer/9889544?hl=en#episode_tags
+    private String guid = "";
     private String url = "";
     private String title = "";
     private String description = "";
     private String author = "";
     private String image = "";
     private LocalDateTime published = LocalDateTime.MIN;
+    private int duration = 0;
     
+    public String getGuid() {
+        return guid;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
     public String getUrl() {
         return url;
     }
@@ -57,6 +68,14 @@ public class Episode {
 
     public void setPublished(LocalDateTime published) {
         this.published = published;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     public Episode() {

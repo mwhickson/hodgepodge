@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Podcast {
+    // REF: https://support.google.com/podcast-publishers/answer/9889544?hl=en#podcast_tags
     private String url = "";
     private String title = "";
     private String owner = "";
