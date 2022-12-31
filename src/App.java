@@ -21,7 +21,7 @@ public class App {
         MainForm f = new MainForm();
         f.setVisible(true);
 
-        // String opml = OpmlConverter.ReadOpmlFileAsString(Paths.get("{pathtoopml}"), Charset.forName("UTF-8"));
+        // String opml = OpmlConverter.ReadOpmlFileAsString(Paths.get("/projects/data/hodgepodge/podbay.opml"), Charset.forName("UTF-8"));
 
         // ArrayList<Subscription> subscriptions = new ArrayList<Subscription>();
         // ArrayList<HashMap> subscriptionData = OpmlConverter.BuildSubscriptionPropertyListFromOpmlString(opml);
@@ -35,6 +35,7 @@ public class App {
         // Iterator<Subscription> its = subscriptions.iterator();
         // while (its.hasNext()) {
         //     Subscription s = its.next();
+        //     // System.out.format("%s%n", s.toString());
         //     System.out.format("%s%n", s.toJSON());
         // }
     }
