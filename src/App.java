@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import Controllers.OpmlConverter;
+import Models.Subscription;
 import Views.MainForm;
 
 public class App {
@@ -23,12 +24,19 @@ public class App {
         // String opml = OpmlConverter.ReadOpmlFileAsString(Paths.get("{pathtoopml}"), Charset.forName("UTF-8"));
         // System.out.println(opml);
 
-        // ArrayList<HashMap> subs = OpmlConverter.BuildSubscriptionPropertyListFromOpmlString(opml);
-        // Iterator<HashMap> it = subs.iterator();
+        // ArrayList<Subscription> subscriptions = new ArrayList<Subscription>();
+        // ArrayList<HashMap> subscriptionData = OpmlConverter.BuildSubscriptionPropertyListFromOpmlString(opml);
 
-        // while (it.hasNext()) {
-        //     HashMap sub = it.next();
-        //     System.out.format("%s%n> %s: %s%n%n", sub.get("text"), sub.get("type"), sub.get("xmlUrl"));
+        // Iterator<HashMap> itd = subscriptionData.iterator();
+        // while (itd.hasNext()) {
+        //     HashMap data = itd.next();
+        //     subscriptions.add(new Subscription(data));
+        // }
+
+        // Iterator<Subscription> its = subscriptions.iterator();
+        // while (its.hasNext()) {
+        //     Subscription s = its.next();
+        //     System.out.format("%s%n", s.toJSON());
         // }
 
         // OpmlConverter.WriteOpmlStringToFile(opml, Paths.get("{pathtoopml}"), Charset.forName("UTF-8"), false);
