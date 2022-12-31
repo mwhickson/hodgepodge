@@ -7,6 +7,8 @@ import java.io.StringReader;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -25,7 +27,10 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 public class OpmlConverter {
-    
+
+    public static String DEFAULT_OPML_PATH_EXPRESSION = "/opml/body/outline[@text='feeds']/outline";
+    public static String[] DEFAULT_PROPERTIES_LIST = {"text", "xmlUrl", "type"};
+
     public static String ReadOpmlFileAsString(Path p, Charset c) {
         StringBuilder sb = new StringBuilder();
 
@@ -54,79 +59,63 @@ public class OpmlConverter {
         return success;
     }
 
-    // YUCK!
-    // FIX: make this less like garbage...
-    public static Object BuildSubscriptionListFromOpmlString(String s) {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        XPathFactory factoryx = XPathFactory.newInstance();
+    public static ArrayList<HashMap> BuildSubscriptionPropertyListFromOpmlString(String s) {
+        DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
+        XPathFactory fx = XPathFactory.newInstance();
 
-        DocumentBuilder builder;
         try {
-            builder = factory.newDocumentBuilder();
+            DocumentBuilder builder = f.newDocumentBuilder();
 
             try {
-                InputSource is = new InputSource(new StringReader(s));
-                Document doc = builder.parse(is);
+                Document doc = builder.parse(new InputSource(new StringReader(s)));
 
-                XPath xpath = factoryx.newXPath();
+                XPath xpath = fx.newXPath();
+
                 try {
-                    XPathExpression expr = xpath.compile("/opml/body/outline[@text='feeds']/outline");
+                    ArrayList<HashMap> subPropertyList = new ArrayList<HashMap>();
+                    XPathExpression xpe = xpath.compile(OpmlConverter.DEFAULT_OPML_PATH_EXPRESSION);
 
-                    NodeList list = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
+                    NodeList subList = (NodeList) xpe.evaluate(doc, XPathConstants.NODESET);
 
-                    for (int i = 0; i <= list.getLength(); i++) {
-                        Node n = list.item(i);
+                    for (int i = 0; i < subList.getLength(); i++) {
+                        Node sub = subList.item(i);
+
+                        HashMap<String, String> subProperties = new HashMap<String, String>();
+                        Node p = null;
                         
-                        if (n != null) {
-                            if (n.hasAttributes()) {
-                                NamedNodeMap m = n.getAttributes();
-    
-                                Node an1 = m.getNamedItem("text");
-                                Node an2 = m.getNamedItem("xmlUrl");
-                                Node an3 = m.getNamedItem("type");
-    
-                                boolean printedSomething = false;
-    
-                                if (an1 != null) {
-                                    System.out.print(an1.getTextContent());
-                                    printedSomething = true;
-                                }
-    
-                                if (an2 != null) {
-                                    if (printedSomething) {
-                                        System.out.print(" : ");
+                        if (sub != null) {
+                            if (sub.hasAttributes()) {
+                                NamedNodeMap m = sub.getAttributes();
+
+                                for (int j = 0; j < OpmlConverter.DEFAULT_PROPERTIES_LIST.length; j++) {
+                                    p = m.getNamedItem(OpmlConverter.DEFAULT_PROPERTIES_LIST[j]);
+
+                                    if (p != null) {
+                                        subProperties.put(OpmlConverter.DEFAULT_PROPERTIES_LIST[j], p.getTextContent());
+                                    } else {
+                                        subProperties.put(OpmlConverter.DEFAULT_PROPERTIES_LIST[j], "");
                                     }
-                                    System.out.print(an2.getTextContent());
-                                    printedSomething = true;
                                 }
-    
-                                if (an3 != null) {
-                                    if (printedSomething) {
-                                        System.out.print(" : ");
-                                    }
-                                    System.out.print(an3.getTextContent());
-                                    printedSomething = true;
-                                }
-    
-                                if (printedSomething) {
-                                    System.out.println();
-                                }
+
+                                subPropertyList.add(subProperties);
                             }
                         }
                     }
 
-                    // TODO: create actual subscriptions from NodeList...
-                    return list;
-                } catch (XPathExpressionException e) {
-                    e.printStackTrace();
+                    return subPropertyList;
+
+                } catch (XPathExpressionException ex) {
+                    System.err.format("XPathExpressionException: %s%n", ex);
                 }
-            } catch (SAXException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+
+            } catch (SAXException ex) {
+                System.err.format("SAXException: %s%n", ex);
+            } catch (IOException ex) {
+                System.err.format("IOException: %s%n", ex);
             }
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
+
+        } catch (ParserConfigurationException ex) {
+            System.err.format("ParserConfigurationException: %s%n", ex);
         }
         
         return null;
