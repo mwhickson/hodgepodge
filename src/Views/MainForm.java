@@ -140,7 +140,7 @@ public class MainForm extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(
                     null, 
-                    "Hodgepodge\na podcast player\nby Matthew Hickson", 
+                    "HodgePODge\na podcast player\nby Matthew Hickson", 
                     "About", 
                     JOptionPane.INFORMATION_MESSAGE
                 );
@@ -205,7 +205,7 @@ public class MainForm extends JFrame {
     public MainForm() {
         initComponents();
 
-        setTitle("Hodgepodge");
+        setTitle("HodgePODge");
         setSize(640, 480);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);

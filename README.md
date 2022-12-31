@@ -1,6 +1,6 @@
-# Hodgepodge
+# HodgePODge
 
-Hodgepodge is a podcast player, subscription management, and discovery tool.
+HodgePODge is a podcast player, subscription management, and discovery tool.
 
 ## TODO
 
