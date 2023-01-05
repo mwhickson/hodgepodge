@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import Controllers.OpmlConverter;
+import Controllers.PodcastRetriever;
 import Models.Subscription;
 import Views.MainForm;
 
@@ -21,7 +22,10 @@ public class App {
         MainForm f = new MainForm();
         f.setVisible(true);
 
-        // String opml = OpmlConverter.ReadOpmlFileAsString(Paths.get("/projects/data/hodgepodge/podbay.opml"), Charset.forName("UTF-8"));
+        // String userHome = System.getProperty("user.home");
+        // String dataPath = userHome + "/projects/data/hodgepodge/podbay.opml";
+
+        // String opml = OpmlConverter.ReadOpmlFileAsString(Paths.get(dataPath), Charset.forName("UTF-8"));
 
         // ArrayList<Subscription> subscriptions = new ArrayList<Subscription>();
         // ArrayList<HashMap> subscriptionData = OpmlConverter.BuildSubscriptionPropertyListFromOpmlString(opml);
@@ -38,5 +42,7 @@ public class App {
         //     // System.out.format("%s%n", s.toString());
         //     System.out.format("%s%n", s.toJSON());
         // }
+
+        // PodcastRetriever.GetPodcastFeedByUrl("https://www.cbc.ca/podcasting/includes/radio2/canada_live/enhanced/index.xml");
     }
 }
